@@ -23,7 +23,7 @@ export default function Logout() {
       <div className="flex justify-center items-center space-x-4">
         <button
           onClick={handleLogout}
-          className="btn-animated bg-danger text-white py-3 px-8 rounded-lg font-medium transition-all duration-300"
+          className="btn-animated bg-primary hover:bg-opacity-90 text-white border-2 border-border py-3 px-8 font-medium text-lg rounded-lg transition-all duration-300 text-center"
           disabled={loading}
         >
           {loading ? "Logging out..." : "Logout"}
