@@ -7,6 +7,8 @@ import Home from "@/pages/Home";
 import Shop from "@/pages/Shop";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import UserProfileSidebar from "./components/UserProfileSidebar"; // Where you handle the profile
+import Logout from "./components/Logout";
 import LoadingScreen from "@/components/LoadingScreen";
 import CustomCursor from "@/components/CustomCursor";
 import { useEffect, useState } from "react";
@@ -18,6 +20,8 @@ function Router() {
       <Route path="/shop" component={Shop} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
+      <Route path="/profile" component={UserProfileSidebar} />
+      <Route path="/profile/logout" component={Logout} />
       <Route component={NotFound} />
     </Switch>
   );

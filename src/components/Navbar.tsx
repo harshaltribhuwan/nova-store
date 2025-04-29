@@ -11,6 +11,7 @@ interface NavbarProps {
 export default function Navbar({ openCart }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false); // State to control profile menu
   const cart = useCartStore((state) => state.cart);
   const { animate, gsap } = useGSAP();
   const [location] = useLocation();
@@ -118,9 +119,27 @@ export default function Navbar({ openCart }: NavbarProps) {
           <button className="text-xl" aria-label="Search">
             <Search />
           </button>
-          <button className="text-xl" aria-label="Account">
-            <User />
-          </button>
+          <div className="relative">
+            <button
+              className="text-xl"
+              aria-label="Account"
+              onClick={() => setProfileMenuOpen(!profileMenuOpen)} // Toggle profile menu
+            >
+              <User />
+            </button>
+            {/* Profile menu */}
+            {profileMenuOpen && (
+              <div className="absolute top-10 right-0 w-40 bg-background shadow-lg rounded-md p-4">
+                <Link
+                  href="/profile/logout"
+                  className="block text-sm text-danger py-2"
+                  onClick={() => setProfileMenuOpen(false)} // Close menu after click
+                >
+                  Logout
+                </Link>
+              </div>
+            )}
+          </div>
           <button
             className="text-xl relative"
             onClick={openCart}
@@ -148,14 +167,6 @@ export default function Navbar({ openCart }: NavbarProps) {
         id="mobile-menu"
         className="fixed top-0 left-0 w-full h-full bg-background/95 backdrop-blur-lg z-40 overflow-hidden flex flex-col justify-center items-center space-y-8 text-2xl transform translate-x-full"
       >
-        {/* <button
-          className="absolute top-6 right-8 text-2xl"
-          onClick={() => setIsMobileMenuOpen(false)}
-          aria-label="Close menu"
-        >
-          <X />
-        </button> */}
-
         <Link
           href="/"
           className="nav-link font-heading"
