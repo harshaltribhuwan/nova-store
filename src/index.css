@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@700;800;900&family=Inter:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 7%;
+  --foreground: 0 0% 98%;
+  
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  
+  --primary: 341 100% 59%;
+  --primary-foreground: 211 100% 99%;
+  
+  --secondary: 270 100% 50%;
+  --secondary-foreground: 0 0% 98%;
+  
+  --accent: 180 100% 50%;
+  --accent-foreground: 240 10% 3.9%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+
+  --chart-1: 341 100% 59%;
+  --chart-2: 270 100% 50%;
+  --chart-3: 180 100% 50%;
+  --chart-4: 60 100% 50%;
+  --chart-5: 120 100% 50%;
+
+  --sidebar-background: 240 10% 3.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 341 100% 59%;
+  --sidebar-primary-foreground: 211 100% 99%;
+  --sidebar-accent: 180 100% 50%;
+  --sidebar-accent-foreground: 240 10% 3.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 240 4.9% 83.9%;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-background text-foreground cursor-none overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .cursor-dot {
+    @apply w-5 h-5 rounded-full bg-primary fixed z-[9999] pointer-events-none transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference transition-transform duration-200;
+  }
+  
+  .cursor-outline {
+    @apply w-10 h-10 border-2 border-secondary rounded-full fixed z-[9998] pointer-events-none transform -translate-x-1/2 -translate-y-1/2 opacity-50 transition-all duration-300;
+  }
+
+  .btn-animated {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+  
+  .btn-animated::after {
+    @apply content-[''] absolute top-0 left-[-100%] w-full h-full bg-white/20 transition-all duration-300;
+  }
+  
+  .btn-animated:hover::after {
+    @apply left-[100%];
+  }
+
+  .nav-link {
+    @apply relative;
+  }
+  
+  .nav-link::after {
+    @apply content-[''] absolute bottom-[-2px] left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .product-card {
+    @apply transition-all duration-300 transform;
+  }
+  
+  .product-card:hover {
+    @apply -translate-y-2.5 shadow-xl;
+  }
+
+  .product-image-container {
+    @apply overflow-hidden;
+  }
+  
+  .product-image {
+    @apply transition-transform duration-500;
+  }
+  
+  .product-card:hover .product-image {
+    @apply scale-110;
+  }
+  
+  .quick-add {
+    @apply absolute bottom-0 left-0 right-0 py-4 px-4 bg-primary/90 text-white text-center transform translate-y-full transition-transform duration-300;
+  }
+  
+  .product-card:hover .quick-add {
+    @apply translate-y-0;
+  }
+
+  .hover-rotate {
+    @apply transition-transform duration-300;
+  }
+  
+  .hover-rotate:hover {
+    @apply rotate-3 scale-105;
+  }
+
+  .parallax-section {
+    @apply relative overflow-hidden;
+  }
+  
+  .parallax-bg {
+    @apply absolute top-0 left-0 w-full h-[120%] bg-cover bg-center -z-10;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-20px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+}
+
+.scroll-indicator {
+  @apply absolute bottom-10 left-1/2 transform -translate-x-1/2;
+  animation: bounce 2s infinite;
+}
+
+.perspective-container {
+  perspective: 1000px;
+}
+
+.rotating-card {
+  @apply transition-transform duration-500;
+  transform-style: preserve-3d;
+}
+
+.cart-item {
+  @apply transform -translate-x-full opacity-0;
+}
