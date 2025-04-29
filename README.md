@@ -6,9 +6,6 @@ This is a modern e-commerce frontend built using the **React**, with additional 
 
 - [Technologies Used](#technologies-used)
 - [Features](#features)
-- [Getting Started](#getting-started)
-- [Deployment](#deployment)
-- [Acknowledgments](#acknowledgments)
 
 ## Technologies Used
 
