@@ -29,7 +29,7 @@ export default function Logout() {
           {loading ? "Logging out..." : "Logout"}
         </button>
         <Link
-          href="/profile"
+          href="/"
           className="btn-animated bg-transparent border-2 border-border hover:border-primary text-white hover:text-primary py-3 px-8 rounded-lg font-medium transition-all duration-300"
         >
           Cancel
