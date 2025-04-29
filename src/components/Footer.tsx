@@ -85,7 +85,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-sm mb-4 md:mb-0">&copy; 2023 NOVA. All rights reserved.</p>
+          <p className="text-muted-foreground text-sm mb-4 md:mb-0">&copy; {new Date().getFullYear()} NOVA. All rights reserved.</p>
           <div className="flex space-x-6">
             <a href="#" className="text-muted-foreground hover:text-foreground text-sm">Privacy Policy</a>
             <a href="#" className="text-muted-foreground hover:text-foreground text-sm">Terms of Service</a>
