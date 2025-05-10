@@ -110,7 +110,7 @@ export default function FlightRedirect() {
 
   return (
     <Card className="card-premium w-full">
-      <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-xl">
+      <CardHeader className="bg-gradient-to-r  to-indigo-600 text-black rounded-t-xl">
         <CardTitle className="text-xl font-heading font-semibold flex items-center">
           <Plane className="mr-2 h-5 w-5" /> Flight Search
         </CardTitle>
