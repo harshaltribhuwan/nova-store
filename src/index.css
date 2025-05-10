@@ -1,170 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@700;800;900&family=Inter:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 7%;
-  --foreground: 0 0% 98%;
-  
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  
-  --primary: 341 100% 59%;
+  --background: 210 33% 98%; /* Light blue-gray background */
+  --foreground: 210 27% 22%;
+  --muted: 210 20% 94%;
+  --muted-foreground: 210 15% 45%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 27% 22%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 27% 22%;
+  --border: 210 20% 90%;
+  --input: 210 20% 94%;
+  --primary: 216 98% 52%; /* Vibrant blue */
   --primary-foreground: 211 100% 99%;
-  
-  --secondary: 270 100% 50%;
-  --secondary-foreground: 0 0% 98%;
-  
-  --accent: 180 100% 50%;
-  --accent-foreground: 240 10% 3.9%;
-  
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  
-  --ring: 240 4.9% 83.9%;
+  --secondary: 206 100% 97%;
+  --secondary-foreground: 216 98% 40%;
+  --accent: 193 100% 46%; /* Accent teal */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 216 98% 52%;
   --radius: 0.5rem;
+}
 
-  --chart-1: 341 100% 59%;
-  --chart-2: 270 100% 50%;
-  --chart-3: 180 100% 50%;
-  --chart-4: 60 100% 50%;
-  --chart-5: 120 100% 50%;
-
-  --sidebar-background: 240 10% 3.9%;
-  --sidebar-foreground: 0 0% 98%;
-  --sidebar-primary: 341 100% 59%;
-  --sidebar-primary-foreground: 211 100% 99%;
-  --sidebar-accent: 180 100% 50%;
-  --sidebar-accent-foreground: 240 10% 3.9%;
-  --sidebar-border: 240 3.7% 15.9%;
-  --sidebar-ring: 240 4.9% 83.9%;
+.dark {
+  --background: 222 47% 10%;
+  --foreground: 210 20% 98%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 210 20% 70%;
+  --popover: 222 47% 10%;
+  --popover-foreground: 210 20% 98%;
+  --card: 223 47% 12%;
+  --card-foreground: 210 20% 98%;
+  --border: 217 33% 25%;
+  --input: 217 33% 17%;
+  --primary: 216 98% 52%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 20% 98%;
+  --accent: 193 100% 46%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 40.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 216 98% 60%;
+  --radius: 0.5rem;
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+
   body {
-    @apply font-sans antialiased bg-background text-foreground cursor-none overflow-x-hidden;
+    @apply font-sans antialiased bg-background text-foreground;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading tracking-tight;
   }
 }
 
+/* Premium styling enhancements */
 @layer components {
-  .cursor-dot {
-    @apply w-5 h-5 rounded-full bg-primary fixed z-[9999] pointer-events-none transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference transition-transform duration-200;
-  }
-  
-  .cursor-outline {
-    @apply w-10 h-10 border-2 border-secondary rounded-full fixed z-[9998] pointer-events-none transform -translate-x-1/2 -translate-y-1/2 opacity-50 transition-all duration-300;
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-blue-600 to-indigo-600 text-white;
   }
 
-  .btn-animated {
-    @apply relative overflow-hidden transition-all duration-300;
-  }
-  
-  .btn-animated::after {
-    @apply content-[''] absolute top-0 left-[-100%] w-full h-full bg-white/20 transition-all duration-300;
-  }
-  
-  .btn-animated:hover::after {
-    @apply left-[100%];
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600;
   }
 
-  .nav-link {
-    @apply relative;
-  }
-  
-  .nav-link::after {
-    @apply content-[''] absolute bottom-[-2px] left-0 w-0 h-0.5 bg-primary transition-all duration-300;
-  }
-  
-  .nav-link:hover::after {
-    @apply w-full;
+  .card-premium {
+    @apply bg-white shadow-xl border-0 rounded-xl transition-all hover:shadow-2xl;
   }
 
-  .product-card {
-    @apply transition-all duration-300 transform;
-  }
-  
-  .product-card:hover {
-    @apply -translate-y-2.5 shadow-xl;
+  .button-premium {
+    @apply bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150;
   }
 
-  .product-image-container {
-    @apply overflow-hidden;
-  }
-  
-  .product-image {
-    @apply transition-transform duration-500;
-  }
-  
-  .product-card:hover .product-image {
-    @apply scale-110;
-  }
-  
-  .quick-add {
-    @apply absolute bottom-0 left-0 right-0 py-4 px-4 bg-primary/90 text-white text-center transform translate-y-full transition-transform duration-300;
-  }
-  
-  .product-card:hover .quick-add {
-    @apply translate-y-0;
+  .input-premium {
+    @apply border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent;
   }
 
-  .hover-rotate {
-    @apply transition-transform duration-300;
-  }
-  
-  .hover-rotate:hover {
-    @apply rotate-3 scale-105;
+  .sidebar-item.active {
+    @apply bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 font-medium;
   }
 
-  .parallax-section {
-    @apply relative overflow-hidden;
+  .sidebar-icon {
+    @apply transition-colors duration-200;
   }
-  
-  .parallax-bg {
-    @apply absolute top-0 left-0 w-full h-[120%] bg-cover bg-center -z-10;
+
+  .font-heading {
+    font-family: 'Montserrat', sans-serif;
   }
-}
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0) translateX(-50%);
+  .card-shadow-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
   }
-  40% {
-    transform: translateY(-20px) translateX(-50%);
-  }
-  60% {
-    transform: translateY(-10px) translateX(-50%);
-  }
-}
-
-.scroll-indicator {
-  @apply absolute bottom-10 left-1/2 transform -translate-x-1/2;
-  animation: bounce 2s infinite;
-}
-
-.perspective-container {
-  perspective: 1000px;
-}
-
-.rotating-card {
-  @apply transition-transform duration-500;
-  transform-style: preserve-3d;
-}
-
-.cart-item {
-  @apply transform -translate-x-full opacity-0;
 }
