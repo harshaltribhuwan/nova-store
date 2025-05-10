@@ -138,9 +138,9 @@ export default function TripForm({
           {isEditing ? "Edit Trip" : "Create New Trip"}
         </DialogTitle>
         {/* Single close icon */}
-        <Button variant="ghost" size="icon" onClick={onClose}>
+        {/* <Button variant="ghost" size="icon" onClick={onClose}>
           <X className="h-4 w-4" />
-        </Button>
+        </Button> */}
       </div>
 
       <Form {...form}>
