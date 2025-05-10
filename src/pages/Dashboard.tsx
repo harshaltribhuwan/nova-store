@@ -4,14 +4,14 @@ import { Trip } from "@shared/schema";
 import Sidebar from "@/components/Sidebar";
 import MobileHeader from "@/components/MobileHeader";
 import TripCard from "@/components/TripCard";
-import TripFilters from "@/components/TripFilters"; // Assuming this component contains the dropdown
+import TripFilters from "@/components/TripFilters";
 import QuickTools from "@/components/QuickTools";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import TripForm from "@/components/TripForm";
 import { Loader2, Plus } from "lucide-react";
 
-// Optionally switch to mock or fetched data
+// Sample/mock data (replace with your fetched data later)
 const mockTrips: Trip[] = [
   {
     id: "1",
@@ -21,7 +21,7 @@ const mockTrips: Trip[] = [
     endDate: "2025-04-20",
     travelers: 2,
     status: "upcoming",
-    imageUrl: "", // image handled in TripCard
+    imageUrl: "",
   },
   {
     id: "2",
@@ -56,7 +56,7 @@ const mockTrips: Trip[] = [
   {
     id: "5",
     title: "Love In Italy",
-    destination: "italy",
+    destination: "Italy",
     startDate: "2025-12-01",
     endDate: "2025-12-10",
     travelers: 3,
@@ -165,10 +165,10 @@ export default function Dashboard() {
               </Button>
             </div>
 
-            {/* Dropdown Filter */}
+            {/* Filters Component (search, sort, status) */}
             <TripFilters onFilterChange={handleFilterChange} />
 
-            {/* Trip Results */}
+            {/* Trip Cards or Loading State */}
             {isLoading ? (
               <div className="flex justify-center py-12">
                 <Loader2 className="h-8 w-8 animate-spin text-primary-500" />

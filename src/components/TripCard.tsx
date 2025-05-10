@@ -164,7 +164,7 @@ export default function TripCard({ trip }: TripCardProps) {
               </div>
             </div>
           </div>
-          <Link href={`/trip/${trip.id}`} className="block">
+          <Link href={`/`} className="block">
             <button className="button-premium w-full mt-4 text-sm">
               View Details
             </button>

@@ -3,17 +3,16 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { apiRequest } from "@/lib/queryClient";
 import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Trip } from "@shared/schema";
-import { 
-  Form, 
-  FormControl, 
-  FormField, 
-  FormItem, 
-  FormLabel, 
-  FormMessage 
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -37,11 +36,17 @@ interface TripFormProps {
 
 // Form validation schema
 const tripFormSchema = z.object({
-  title: z.string().min(2, { message: "Trip title must be at least 2 characters" }).max(100),
+  title: z
+    .string()
+    .min(2, { message: "Trip title must be at least 2 characters" })
+    .max(100),
   destination: z.string().min(1, { message: "Destination is required" }),
   startDate: z.string().min(1, { message: "Start date is required" }),
   endDate: z.string().min(1, { message: "End date is required" }),
-  travelers: z.coerce.number().min(1, { message: "At least 1 traveler is required" }).max(50),
+  travelers: z.coerce
+    .number()
+    .min(1, { message: "At least 1 traveler is required" })
+    .max(50),
   notes: z.string().optional().nullable(),
   status: z.string().optional().default("upcoming"),
   imageUrl: z.string().optional().nullable(),
@@ -49,18 +54,25 @@ const tripFormSchema = z.object({
 
 type TripFormValues = z.infer<typeof tripFormSchema>;
 
-export default function TripForm({ onClose, initialData, isEditing = false }: TripFormProps) {
+export default function TripForm({
+  onClose,
+  initialData,
+  isEditing = false,
+}: TripFormProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Set up the form with default values
   const form = useForm<TripFormValues>({
     resolver: zodResolver(tripFormSchema),
     defaultValues: {
       title: initialData?.title || "",
       destination: initialData?.destination || "",
-      startDate: initialData?.startDate ? new Date(initialData.startDate).toISOString().split('T')[0] : "",
-      endDate: initialData?.endDate ? new Date(initialData.endDate).toISOString().split('T')[0] : "",
+      startDate: initialData?.startDate
+        ? new Date(initialData.startDate).toISOString().split("T")[0]
+        : "",
+      endDate: initialData?.endDate
+        ? new Date(initialData.endDate).toISOString().split("T")[0]
+        : "",
       travelers: initialData?.travelers || 1,
       notes: initialData?.notes || "",
       status: initialData?.status || "upcoming",
@@ -68,7 +80,6 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
     },
   });
 
-  // Create or update trip mutation
   const { mutate: saveTrip } = useMutation({
     mutationFn: async (data: TripFormValues) => {
       const payload = {
@@ -78,37 +89,43 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
         travelers: Number(data.travelers),
       };
 
-      if (isEditing && initialData?.id) {
-        return apiRequest('PUT', `/api/trips/${initialData.id}`, payload);
-      } else {
-        return apiRequest('POST', '/api/trips', payload);
-      }
+      // Simulate fake backend response
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log(
+            `${isEditing ? "Updated" : "Created"} trip (mock):`,
+            payload
+          );
+          resolve(payload);
+        }, 1000);
+      });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/trips'] });
-      
+      queryClient.invalidateQueries({ queryKey: ["/api/trips"] });
+
       toast({
         title: isEditing ? "Trip updated" : "Trip created",
-        description: isEditing 
-          ? "Your trip has been updated successfully." 
-          : "Your new trip has been created successfully.",
+        description: isEditing
+          ? "Your trip has been updated successfully (mock)."
+          : "Your new trip has been created successfully (mock).",
       });
-      
+
       onClose();
     },
     onError: (error) => {
       toast({
         title: "Error",
-        description: `Failed to ${isEditing ? 'update' : 'create'} trip: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        description: `Failed to ${isEditing ? "update" : "create"} trip: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
         variant: "destructive",
       });
     },
     onSettled: () => {
       setIsSubmitting(false);
-    }
+    },
   });
 
-  // Form submission handler
   function onSubmit(data: TripFormValues) {
     setIsSubmitting(true);
     saveTrip(data);
@@ -120,6 +137,7 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
         <DialogTitle className="text-xl font-semibold">
           {isEditing ? "Edit Trip" : "Create New Trip"}
         </DialogTitle>
+        {/* Single close icon */}
         <Button variant="ghost" size="icon" onClick={onClose}>
           <X className="h-4 w-4" />
         </Button>
@@ -134,9 +152,9 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
               <FormItem>
                 <FormLabel>Trip Title</FormLabel>
                 <FormControl>
-                  <Input 
-                    placeholder="e.g. Summer Vacation" 
-                    {...field} 
+                  <Input
+                    placeholder="e.g. Summer Vacation"
+                    {...field}
                     disabled={isSubmitting}
                   />
                 </FormControl>
@@ -151,8 +169,8 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Destination Country</FormLabel>
-                <Select 
-                  onValueChange={field.onChange} 
+                <Select
+                  onValueChange={field.onChange}
                   defaultValue={field.value}
                   disabled={isSubmitting}
                 >
@@ -182,11 +200,7 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
                 <FormItem>
                   <FormLabel>Start Date</FormLabel>
                   <FormControl>
-                    <Input 
-                      type="date" 
-                      {...field} 
-                      disabled={isSubmitting}
-                    />
+                    <Input type="date" {...field} disabled={isSubmitting} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -200,11 +214,7 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
                 <FormItem>
                   <FormLabel>End Date</FormLabel>
                   <FormControl>
-                    <Input 
-                      type="date" 
-                      {...field} 
-                      disabled={isSubmitting}
-                    />
+                    <Input type="date" {...field} disabled={isSubmitting} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -219,12 +229,12 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
               <FormItem>
                 <FormLabel>Number of Travelers</FormLabel>
                 <FormControl>
-                  <Input 
-                    type="number" 
-                    min={1} 
-                    max={50} 
+                  <Input
+                    type="number"
+                    min={1}
+                    max={50}
                     {...field}
-                    onChange={e => field.onChange(parseInt(e.target.value))}
+                    onChange={(e) => field.onChange(parseInt(e.target.value))}
                     disabled={isSubmitting}
                   />
                 </FormControl>
@@ -240,8 +250,8 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Trip Status</FormLabel>
-                  <Select 
-                    onValueChange={field.onChange} 
+                  <Select
+                    onValueChange={field.onChange}
                     defaultValue={field.value}
                     disabled={isSubmitting}
                   >
@@ -269,10 +279,10 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
               <FormItem>
                 <FormLabel>Trip Notes (Optional)</FormLabel>
                 <FormControl>
-                  <Textarea 
-                    placeholder="Add any notes or details about your trip..." 
-                    {...field} 
-                    value={field.value || ''}
+                  <Textarea
+                    placeholder="Add any notes or details about your trip..."
+                    {...field}
+                    value={field.value || ""}
                     rows={3}
                     disabled={isSubmitting}
                     className="input-premium"
@@ -284,20 +294,24 @@ export default function TripForm({ onClose, initialData, isEditing = false }: Tr
           />
 
           <div className="flex justify-end gap-2 pt-2">
-            <Button 
-              type="button" 
-              variant="outline" 
+            <Button
+              type="button"
+              variant="outline"
               onClick={onClose}
               disabled={isSubmitting}
             >
               Cancel
             </Button>
-            <Button 
+            <Button
               type="submit"
               disabled={isSubmitting}
               className="button-premium"
             >
-              {isSubmitting ? 'Saving...' : isEditing ? 'Update Trip' : 'Create Trip'}
+              {isSubmitting
+                ? "Saving..."
+                : isEditing
+                ? "Update Trip"
+                : "Create Trip"}
             </Button>
           </div>
         </form>
