@@ -1,6 +1,7 @@
-# Nova store
+# Travel Mate
 
-This is a modern e-commerce frontend built using the **React**, with additional libraries and utilities like **GSAP** for animations, **Framer Motion** for motion, **Radix UI** components for accessibility, and **Tailwind CSS** for styling.
+TravelMate is an AI-powered, all-in-one travel assistant web application designed to simplify and enhance the experience of travelers around the world. The MVP brings together essential travel utilities in a single, intuitive interface using real-time APIs, Firebase, and modern frontend technologies.
+
 
 ## Table of Contents
 
@@ -12,8 +13,6 @@ This is a modern e-commerce frontend built using the **React**, with additional 
 - **React** - A JavaScript library for building user interfaces
 - **Vite** - A modern build tool that provides a faster development experience
 - **Tailwind CSS** - A utility-first CSS framework for styling
-- **Framer Motion** - A library for animations
-- **GSAP** - A JavaScript library for creating animations
 - **Radix UI** - A set of low-level UI components
 - **Lucide React** - A set of open-source SVG icons
 - **zustand** - A small state management library
@@ -23,7 +22,6 @@ This is a modern e-commerce frontend built using the **React**, with additional 
 ## Features
 
 - **Responsive Design**: The app is fully responsive, making it accessible across various devices.
-- **Animations**: The app uses GSAP and Framer Motion for smooth animations, improving the user experience.
 - **Tailwind CSS**: Utilizes Tailwind CSS for fast and efficient styling.
 - **Radix UI**: Provides accessible components like menus, dialogs, and more.
 - **State Management**: Uses Zustand for efficient state management.
