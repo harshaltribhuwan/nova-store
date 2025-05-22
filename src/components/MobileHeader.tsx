@@ -19,10 +19,27 @@ type SidebarItem = {
 };
 
 const sidebarItems: SidebarItem[] = [
-  { id: 'trips', label: 'Trips', icon: 'fas fa-suitcase', route: '/' },
-  { id: 'tools', label: 'Tools', icon: 'fas fa-tools', route: '/tools' },
-  { id: 'flights', label: 'Flights', icon: 'fas fa-plane-departure', route: '/tools#flights' },
-  { id: 'documents', label: 'Documents', icon: 'fas fa-file-alt', route: '/tools#documents' },
+  { id: "trips", label: "Trips", icon: "fas fa-suitcase", route: "/" },
+  { id: "tools", label: "Tools", icon: "fas fa-tools", route: "/tools" },
+  {
+    id: "weather",
+    label: "Weather",
+    icon: "fas fa-cloud-sun",
+    route: "/weather",
+  },
+  {
+    id: "flights",
+    label: "Flights",
+    icon: "fas fa-plane-departure",
+    route: "/flights",
+  },
+
+  {
+    id: "documents",
+    label: "Documents",
+    icon: "fas fa-file-alt",
+    route: "/documents",
+  },
 ];
 
 export default function MobileHeader() {
